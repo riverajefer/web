@@ -1,0 +1,46 @@
+https://www.canva.com/colors/color-palettes/summer-splash/
+
+
+100cm
+
+10 muestras
+
+Tiempo[]
+
+Po 0
+Tiempo0: 0
+
+se1: Tiempo1
+
+se2: Tiempo2
+
+se3: Tiempo3
+
+se4: Tiempo4
+
+se5: Tiempo5
+
+
+Pf 50
+
+"50,25,30..."
+
+Vector
+1:20
+
+1 repe
+
+"50,25,30 @ 51,26,20 @ 51,27,28"
+
+2 repe
+
+
+1. Seleccionables. (10 a 70, con pasos de 10) y el otro Rep (1 a 3, con paso de 1)
+2. Autostart del Aplicativo.
+3. Deshabilitar el boton miesntra se esta enviadnm.
+4. Nuevo envio limpiar los datos anteriores.
+5. Actualizar el contenido de caida libre.
+6. Auto.
+7. Solo usuario.
+
+
