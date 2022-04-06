@@ -64,10 +64,10 @@
                                         <label for="repeticiones" class="col-4 col-form-label">Repeticiones de 1 a 3</label>
                                         <div class="col-8">
                                             <select id="repeticiones" name="repeticiones" class="form-control">
-                                            <option value="1" selected>1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                          </select>
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
                                             <!-- <input id="repeticiones" name="repeticiones" value="2" min="1" max="5" step="1" placeholder="Repeticiones" type="number" class="form-control"> -->
                                         </div>
                                     </div>
@@ -152,7 +152,10 @@
                 counter = snapshot.val().counter;
                 data_resp = snapshot.val().data;
                 console.log('data resp', data_resp);
-                setGraph(data_resp);
+                $('#enviar').attr('disabled', false);
+                if (data_resp !== undefined) {
+                    setGraph(data_resp);
+                }
             });
 
 
@@ -202,6 +205,8 @@
 
 
             $("#enviar").click(function(event) {
+                $('#enviar').attr('disabled', true);
+
                 event.preventDefault();
                 const distancia = $('#distancia').val();
                 const repeticiones = $('#repeticiones').val();
