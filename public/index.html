@@ -49,13 +49,13 @@
                                         <label for="distancia" class="col-4 col-form-label">Distancia de 10cm - 70cm</label>
                                         <div class="col-8">
                                             <select id="distancia" name="distancia" class="form-control">
-                        <option value="10" selected>10 cm</option>
-                        <option value="20">20 cm</option>
-                        <option value="30">30 cm</option>
-                        <option value="40">40 cm</option>
-                        <option value="50">50 cm</option>
-                        <option value="60">60 cm</option>
-                        <option value="70">70 cm</option>
+                        <option value="1" selected>10 cm</option>
+                        <option value="2">20 cm</option>
+                        <option value="3">30 cm</option>
+                        <option value="4">40 cm</option>
+                        <option value="5">50 cm</option>
+                        <option value="6">60 cm</option>
+                        <option value="7">70 cm</option>
                       </select>
                                             <!-- <input id="distancia" name="distancia" min="5" max="100" value="5" step="5" placeholder="Distancia" type="number" required="required" class="form-control"> -->
                                         </div>
@@ -75,10 +75,10 @@
                                         <div class="offset-4 col-8">
                                             <button name="submit" type="submit" id="enviar" class="btn btn-primary">ENVIAR</button>
                                         </div>
+                                        <p class="ejecutando">Ejecutando...</p>
                                     </div>
                                 </form>
                                 <div>
-                                    <button id="test"> TEST</button>
                                     <canvas id="myChart"></canvas>
                                 </div>
 
@@ -98,6 +98,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            $('.ejecutando').hide();
 
             const data = {
                 datasets: []
@@ -152,20 +153,14 @@
                 counter = snapshot.val().counter;
                 data_resp = snapshot.val().data;
                 console.log('data resp', data_resp);
-                $('#enviar').attr('disabled', false);
                 if (data_resp !== undefined) {
+                    $('#enviar').attr('disabled', false);
+                    $('.ejecutando').hide();
                     setGraph(data_resp);
+                    myChart.update();
                 }
             });
 
-
-            $("#test").click(function(event) {
-                event.preventDefault();
-                setGraph(data_resp);
-
-                myChart.update();
-
-            });
 
             function setGraph(data_resp) {
                 myChart.config.data.datasets = [];
@@ -203,9 +198,17 @@
 
             }
 
+            function clearGraph() {
+                myChart.config.data.datasets = [];
+                myChart.update();
+            }
 
+
+            // se ejecuta cuando se da click en el boton de enviar
             $("#enviar").click(function(event) {
                 $('#enviar').attr('disabled', true);
+                $('.ejecutando').show();
+                clearGraph();
 
                 event.preventDefault();
                 const distancia = $('#distancia').val();
