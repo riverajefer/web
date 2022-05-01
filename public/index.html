@@ -13,8 +13,11 @@
     <script defer src="/__/firebase/8.3.3/firebase-app.js"></script>
     <script defer src="/__/firebase/8.3.3/firebase-database.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.3.3/firebase-auth.min.js" integrity="sha512-l0i+O3AfLS/mtNotaGw8tg4qg5bVCZDEwUDiDjAicmBrR0G+lqMlmSozvfPcX1TwliG4tbuFgo2l/xAlFc0NkQ==" crossorigin="anonymous"></script>
+
     <script src="https://raw.githubusercontent.com/google/palette.js/master/palette.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
 </head>
 
 <body>
@@ -35,10 +38,11 @@
                             </div>
                         </nav>
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                            <div class="offset-4 col-8">
+                                <button id="login" class="btn btn-primary">LOGIN</button>
+                            </div>
                             <div class="tab-pane fade show active" id="nav-teoria" role="tabpanel" aria-labelledby="nav-teoria-tab">
-                                Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt
-                                irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit
-                                do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                                <iframe src="teoria.pdf" frameBorder="0" scrolling="auto" height="100%" width="100%" style="min-height:700px"></iframe>
                             </div>
                             <div class="tab-pane fade" id="nav-experimento" role="tabpanel" aria-labelledby="nav-experimento-tab">
                                 <h3 class="mb-5">
@@ -46,28 +50,30 @@
                                 </h3>
                                 <form class="form_exp" id="form_exp">
                                     <div class="form-group row">
-                                        <label for="distancia" class="col-4 col-form-label">Distancia de 10cm - 70cm</label>
+                                        <label for="distancia" class="col-4 col-form-label">Distancia de 10cm -
+                                            70cm</label>
                                         <div class="col-8">
                                             <select id="distancia" name="distancia" class="form-control">
-                        <option value="1" selected>10 cm</option>
-                        <option value="2">20 cm</option>
-                        <option value="3">30 cm</option>
-                        <option value="4">40 cm</option>
-                        <option value="5">50 cm</option>
-                        <option value="6">60 cm</option>
-                        <option value="7">70 cm</option>
-                      </select>
+                                                <option value="1" selected>10 cm</option>
+                                                <option value="2">20 cm</option>
+                                                <option value="3">30 cm</option>
+                                                <option value="4">40 cm</option>
+                                                <option value="5">50 cm</option>
+                                                <option value="6">60 cm</option>
+                                                <option value="7">70 cm</option>
+                                            </select>
                                             <!-- <input id="distancia" name="distancia" min="5" max="100" value="5" step="5" placeholder="Distancia" type="number" required="required" class="form-control"> -->
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="repeticiones" class="col-4 col-form-label">Repeticiones de 1 a 3</label>
+                                        <label for="repeticiones" class="col-4 col-form-label">Repeticiones de 1 a
+                                            3</label>
                                         <div class="col-8">
                                             <select id="repeticiones" name="repeticiones" class="form-control">
-                        <option value="1" selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                      </select>
+                                                <option value="1" selected>1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
                                             <!-- <input id="repeticiones" name="repeticiones" value="2" min="1" max="5" step="1" placeholder="Repeticiones" type="number" class="form-control"> -->
                                         </div>
                                     </div>
@@ -85,9 +91,15 @@
 
                             </div>
                             <div class="tab-pane fade" id="nav-acerca" role="tabpanel" aria-labelledby="nav-acerca-tab">
-                                Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt
-                                irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit
-                                do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                                <h1>
+                                    Prototipo Didáctico Automático Y Remoto Para Pruebas De Caída Libre
+                                </h1>
+                                <div>
+                                    <h4>Desarrollado por:</h4>
+                                    <p>Jorge Luis Coral Azain.</p>
+                                    <p>Héctor Fabián Ojeda Chaves.</p>
+                                    <p>Ingenieros Mecatrónicos de la Universidad Mariana.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,141 +108,6 @@
         </section>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            $('.ejecutando').hide();
-
-            const data = {
-                datasets: []
-            };
-            const config = {
-                type: 'scatter',
-                data: data,
-                options: {
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    scales: {
-
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Distancia de caida libre (cm)'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Tiempo (micro segundos)'
-                            }
-                        },
-                        yAxes: [{
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'probability'
-                                }
-                            },
-
-                        ]
-                    },
-                }
-            };
-            const myChart = new Chart(
-                document.getElementById('myChart'),
-                config
-            );
-
-            const loadEl = document.querySelector('#load');
-            let counter = 0;
-            let data_resp = [];
-
-            firebase.database().ref('experimento').on('value', snapshot => {
-                counter = snapshot.val().counter;
-                data_resp = snapshot.val().data;
-                console.log('data resp', data_resp);
-                if (data_resp !== undefined) {
-                    $('#enviar').attr('disabled', false);
-                    $('.ejecutando').hide();
-                    setGraph(data_resp);
-                    myChart.update();
-                }
-            });
-
-
-            function setGraph(data_resp) {
-                myChart.config.data.datasets = [];
-                console.log(data_resp);
-
-                let labels_data = []
-                let repetition = []
-                let map_xy = [
-                    []
-                ];
-
-                for (let i = 0; i < data_resp.length; i++) {
-                    map_xy[i] = []
-                    repetition = data_resp[i];
-                    for (let j = 0; j < repetition.length; j++) {
-                        map_xy[i][j] = {
-                            x: repetition[j],
-                            y: j * 10
-                        }
-                    }
-                }
-
-                for (let i = 0; i < map_xy.length; i++) {
-                    myChart.config.data.datasets.push({
-                        label: `Repetición: ${i+1}`,
-                        data: map_xy[i],
-                        showLine: true,
-                        fill: false,
-                        backgroundColor: '#ff0000',
-                        borderColor: '#' + Math.floor(Math.random() * 16777215).toString(16)
-                    })
-
-                }
-                console.log('map_xy', map_xy)
-
-            }
-
-            function clearGraph() {
-                myChart.config.data.datasets = [];
-                myChart.update();
-            }
-
-
-            // se ejecuta cuando se da click en el boton de enviar
-            $("#enviar").click(function(event) {
-                $('#enviar').attr('disabled', true);
-                $('.ejecutando').show();
-                clearGraph();
-
-                event.preventDefault();
-                const distancia = $('#distancia').val();
-                const repeticiones = $('#repeticiones').val();
-                console.log('distancia: ', distancia, 'repeticiones: ', repeticiones);
-                counter = counter + 1;
-
-                firebase.database().ref('experimento').set({
-                    distancia: distancia,
-                    repeticiones: repeticiones,
-                    counter: counter
-                }, (error) => {
-                    if (error) {
-                        console.log('error: ', error);
-                    } else {
-                        console.log('Data saved successfully');
-                    }
-                });
-            });
-
-        });
-    </script>
 </body>
 
 </html>
