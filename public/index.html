@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Experimento caida libre</title>
     <link rel="stylesheet" href="css/main.css">
-
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -14,7 +13,6 @@
     <script defer src="/__/firebase/8.3.3/firebase-database.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.3.3/firebase-auth.min.js" integrity="sha512-l0i+O3AfLS/mtNotaGw8tg4qg5bVCZDEwUDiDjAicmBrR0G+lqMlmSozvfPcX1TwliG4tbuFgo2l/xAlFc0NkQ==" crossorigin="anonymous"></script>
-
     <script src="https://raw.githubusercontent.com/google/palette.js/master/palette.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/main.js"></script>
@@ -22,90 +20,114 @@
 
 <body>
 
-    <div id="load">
-
-        <!-- Tabs -->
-        <section id="tabs">
+    <div id="page">
+        <!-- login -->
+        <div class="login_section">
             <div class="container">
-                <h6 class="section-title h1">PROYECTO CAIDA LIBRE</h6>
-                <div class="row mt-5">
-                    <div class="col-xs-12 col-sm-12">
-                        <nav>
-                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-teoria-tab" data-toggle="tab" href="#nav-teoria" role="tab" aria-controls="nav-teoria" aria-selected="true">TEORÍA</a>
-                                <a class="nav-item nav-link" id="nav-experimento-tab" data-toggle="tab" href="#nav-experimento" role="tab" aria-controls="nav-experimento" aria-selected="false">EXPERIMENTO</a>
-                                <a class="nav-item nav-link" id="nav-acerca-tab" data-toggle="tab" href="#nav-acerca" role="tab" aria-controls="nav-acerca" aria-selected="false">ACERCA</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                            <div class="offset-4 col-8">
-                                <button id="login" class="btn btn-primary">LOGIN</button>
-                            </div>
-                            <div class="tab-pane fade show active" id="nav-teoria" role="tabpanel" aria-labelledby="nav-teoria-tab">
-                                <iframe src="teoria.pdf" frameBorder="0" scrolling="auto" height="100%" width="100%" style="min-height:700px"></iframe>
-                            </div>
-                            <div class="tab-pane fade" id="nav-experimento" role="tabpanel" aria-labelledby="nav-experimento-tab">
-                                <h3 class="mb-5">
-                                    Introduce los datos a continuación
-                                </h3>
-                                <form class="form_exp" id="form_exp">
-                                    <div class="form-group row">
-                                        <label for="distancia" class="col-4 col-form-label">Distancia de 10cm -
-                                            70cm</label>
-                                        <div class="col-8">
-                                            <select id="distancia" name="distancia" class="form-control">
-                                                <option value="1" selected>10 cm</option>
-                                                <option value="2">20 cm</option>
-                                                <option value="3">30 cm</option>
-                                                <option value="4">40 cm</option>
-                                                <option value="5">50 cm</option>
-                                                <option value="6">60 cm</option>
-                                                <option value="7">70 cm</option>
-                                            </select>
-                                            <!-- <input id="distancia" name="distancia" min="5" max="100" value="5" step="5" placeholder="Distancia" type="number" required="required" class="form-control"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="repeticiones" class="col-4 col-form-label">Repeticiones de 1 a
-                                            3</label>
-                                        <div class="col-8">
-                                            <select id="repeticiones" name="repeticiones" class="form-control">
-                                                <option value="1" selected>1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>
-                                            <!-- <input id="repeticiones" name="repeticiones" value="2" min="1" max="5" step="1" placeholder="Repeticiones" type="number" class="form-control"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="offset-4 col-8">
-                                            <button name="submit" type="submit" id="enviar" class="btn btn-primary">ENVIAR</button>
-                                        </div>
-                                        <p class="ejecutando">Ejecutando...</p>
-                                    </div>
-                                </form>
-                                <div>
-                                    <canvas id="myChart"></canvas>
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <h2 class="text-center text-ligth mt-5">Login</h2>
+                        <div class="card my-5">
+                            <form class="card-body cardbody-color p-lg-5" id="form_login">
+                                <div class="text-center">
+                                    <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px" alt="profile">
                                 </div>
 
+                                <div class="mb-3">
+                                    <input type="text" required class="form-control" id="email" aria-describedby="email" placeholder="Email">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" required class="form-control" id="password" placeholder="password">
+                                </div>
+                                <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">INGRESAR</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                            </div>
-                            <div class="tab-pane fade" id="nav-acerca" role="tabpanel" aria-labelledby="nav-acerca-tab">
-                                <h1>
-                                    Prototipo Didáctico Automático Y Remoto Para Pruebas De Caída Libre
-                                </h1>
-                                <div>
-                                    <h4>Desarrollado por:</h4>
-                                    <p>Jorge Luis Coral Azain.</p>
-                                    <p>Héctor Fabián Ojeda Chaves.</p>
-                                    <p>Ingenieros Mecatrónicos de la Universidad Mariana.</p>
+        <!-- Tabs -->
+        <div class="section_project">
+            <section id="tabs">
+                <div class="container">
+                    <h6 class="section-title h1">PROYECTO CAIDA LIBRE</h6>
+                    <div class="row mt-5">
+                        <div class="col-xs-12 col-sm-12">
+                            <nav>
+                                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-teoria-tab" data-toggle="tab" href="#nav-teoria" role="tab" aria-controls="nav-teoria" aria-selected="true">TEORÍA</a>
+                                    <a class="nav-item nav-link" id="nav-experimento-tab" data-toggle="tab" href="#nav-experimento" role="tab" aria-controls="nav-experimento" aria-selected="false">EXPERIMENTO</a>
+                                    <a class="nav-item nav-link" id="nav-acerca-tab" data-toggle="tab" href="#nav-acerca" role="tab" aria-controls="nav-acerca" aria-selected="false">ACERCA</a>
+                                </div>
+                            </nav>
+                            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-teoria" role="tabpanel" aria-labelledby="nav-teoria-tab">
+                                    <iframe src="teoria.pdf" frameBorder="0" scrolling="auto" height="100%" width="100%" style="min-height:700px"></iframe>
+                                </div>
+                                <div class="tab-pane fade" id="nav-experimento" role="tabpanel" aria-labelledby="nav-experimento-tab">
+                                    <h3 class="mb-5">
+                                        Introduce los datos a continuación
+                                    </h3>
+                                    <form class="form_exp" id="form_exp">
+                                        <div class="form-group row">
+                                            <label for="distancia" class="col-4 col-form-label">Distancia de 10cm -
+                                                70cm</label>
+                                            <div class="col-8">
+                                                <select id="distancia" name="distancia" class="form-control">
+                                                    <option value="1" selected>10 cm</option>
+                                                    <option value="2">20 cm</option>
+                                                    <option value="3">30 cm</option>
+                                                    <option value="4">40 cm</option>
+                                                    <option value="5">50 cm</option>
+                                                    <option value="6">60 cm</option>
+                                                    <option value="7">70 cm</option>
+                                                </select>
+                                                <!-- <input id="distancia" name="distancia" min="5" max="100" value="5" step="5" placeholder="Distancia" type="number" required="required" class="form-control"> -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="repeticiones" class="col-4 col-form-label">Repeticiones de 1 a
+                                                3</label>
+                                            <div class="col-8">
+                                                <select id="repeticiones" name="repeticiones" class="form-control">
+                                                    <option value="1" selected>1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                                <!-- <input id="repeticiones" name="repeticiones" value="2" min="1" max="5" step="1" placeholder="Repeticiones" type="number" class="form-control"> -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="offset-4 col-8">
+                                                <button name="submit" type="submit" id="enviar" class="btn btn-primary">ENVIAR</button>
+                                            </div>
+                                            <p class="ejecutando">Ejecutando...</p>
+                                        </div>
+                                    </form>
+                                    <div>
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane fade" id="nav-acerca" role="tabpanel" aria-labelledby="nav-acerca-tab">
+                                    <h1>
+                                        Prototipo Didáctico Automático Y Remoto Para Pruebas De Caída Libre
+                                    </h1>
+                                    <div>
+                                        <h4>Desarrollado por:</h4>
+                                        <p>Jorge Luis Coral Azain.</p>
+                                        <p>Héctor Fabián Ojeda Chaves.</p>
+                                        <p>Ingenieros Mecatrónicos de la Universidad Mariana.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
 
 </body>

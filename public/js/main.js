@@ -1,7 +1,19 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
 document.addEventListener('DOMContentLoaded', function() {
     $('.ejecutando').hide();
+
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            var uid = user.uid;
+            console.log('user login', user)
+            $('.login_section').hide();
+            $('.section_project').show();
+        } else {
+            $('.login_section').show();
+            $('.section_project').hide();
+            console.log('User is signed out');
+        }
+    });
+
 
     const data = {
         datasets: []
@@ -48,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
         config
     );
 
-    const loadEl = document.querySelector('#load');
     let counter = 0;
     let data_resp = [];
 
@@ -132,28 +143,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // se ejecuta cuando se da click en el boton de enviar
-    $("#login").click(function(event) {
-        console.log('login');
+    // se ejecuta cuando se da click en el boton de login
+    $('#form_login').submit(function(e) {
+        e.preventDefault();
+        console.log('login Form');
+        const email = $('#email').val();
+        const password = $('#password').val();
 
-        const email = 'riverajefer@gmail.com';
-        const password = '320542';
-
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                // Signed in
-                console.log('userCredential:', userCredential);
-                var user = userCredential.user;
-                console.log('user:', user);
-
-                // ...
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            .then(() => {
+                return firebase.auth().signInWithEmailAndPassword(email, password);
             })
             .catch((error) => {
-                console.log('error Login', error);
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                console.log('error: ', error);
+                const errorMessage = error.message;
+                $('#password').text();
+                alert(errorMessage);
+            }).then((userCredential) => {
+                $('.login_section').hide();
+                $('.section_project').show();
+                var user = userCredential.user;
+                console.log('user login: ', user);
             });
-
 
     });
 
